@@ -1,0 +1,113 @@
+var URL_API = '192.168.2.13/apivotacao/';
+
+
+var votosComputados = [{
+    Id: 'Victor',
+    Nome: 'Victor',
+    Voto: 'Tanto faz'
+}, {
+    Id: 'Matheus',
+    Nome: 'Matheus',
+    Voto: 'Sim'
+}, {
+    Id: 'Alex',
+    Nome: 'Alex',
+    Voto: 'Nao'
+}, {
+    Id: 'Israel',
+    Nome: 'Israel',
+    Voto: 'Sim'
+}, {
+    Id: 'Oseias',
+    Nome: 'Oseias',
+    Voto: 'Sim'
+}];
+
+onClickSim = function() {
+    requestVotar('S');
+}
+
+onClickNao = function() {
+    requestVotar('N');
+}
+
+onClickTantoFaz = function() {
+    requestVotar('T');
+}
+
+onClickConfirmarNome = function() {
+    localStorage.setItem('nomeVotacao', document.getElementById('nomeGamelao').value);
+}
+
+recuperarNome = function() {
+    var nome = localStorage.getItem('nomeVotacao');
+    if(nome && nome != 'undefined')
+        document.getElementById('nomeGamelao').value = nome;
+}
+
+onClickAtualizar = function() {
+    recuperarVotos();
+}
+
+recuperarVotos = function() {
+    var table = document.getElementById("tabelaVotos");
+    
+
+    // Add some text to the new cells:
+    var total = table.rows.length;
+    for (var i = 1; i <= total - 1; i++) {
+        table.deleteRow(1);
+    }
+
+    for (var i = 0; i <= votosComputados.length - 1; i++) {
+        var row = table.insertRow(table.rows.length);
+
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);    
+        row.Id = votosComputados[i].Id;
+        cell1.innerHTML = votosComputados[i].Nome;
+        cell2.innerHTML = votosComputados[i].Voto;
+    }    
+
+    contabilizaVotos();
+}
+
+contabilizaVotos = function() {
+    var sim = 0, 
+        nao = 0, 
+        tantoFaz = 0;
+
+    for (var i = 0; i <= votosComputados.length - 1; i++) {
+        if(votosComputados[i].Voto=='Sim')
+            sim++;
+
+        if(votosComputados[i].Voto=='Nao')
+            nao++;
+
+        if(votosComputados[i].Voto=='Tanto faz')
+            tantoFaz++;
+    }
+
+    document.getElementById('totalSim').innerText = sim;
+    document.getElementById('totalNao').innerText = nao;
+    document.getElementById('totalTantoFaz').innerText = tantoFaz;
+}
+
+
+requestVotar = function(opc) {
+    var dto = {
+        Voto: opc,
+        Nome: 'Victor'
+    };
+
+    $.ajax({
+       type: "POST",
+       url: URL_API + 'Votacao',
+       data: dto,
+       success: function(msg){
+         alert('wow'+msg);
+       }
+    });
+}
+
+recuperarNome();

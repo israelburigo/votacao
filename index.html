@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+    <title>Sistema de votação - versão: menos dois</title>
+    <script src="jquery.min.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <script src="js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #e6e6e6;
+        }
+
+        body {
+            padding: 10px;
+        }
+
+#formContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 750px;
+  position: relative;
+  padding: 10px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}    
+
+#formContentVotos {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  position: relative;
+  padding: 10px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+}    
+    </style>
+</head>
+<body>
+
+
+    <div class="wrapper">
+        
+
+        <div id="formContent">
+        <h1>Sistema de votação</h1>        
+        <input type="text" id="nomeGamelao" placeholder="Nome">  
+        <button type="button" class="btn btn-primary" onclick="app.onClickConfirmarNome()">Confirmar</button>
+        <!--<button type="button" class="btn btn-primary" onclick="app.onClickCairFora()">Cair fora</button>-->
+        <button type="button" class="btn btn-primary" onclick="app.onClickVerSenha()">Ver Senha</button>
+        
+        </div>
+        <br /><br />
+        <div id="formContent">
+        <h1>Iniciar nova votação </h1>
+        <input type="text" id="descricaoPergunta" size="79px"  placeholder="Pergunta">  
+        <button type="button" class="btn btn-primary" onclick="app.onClickNovaVotacao()">Confirmar</button>        
+        </div>
+
+        <br /><br />
+
+        <div id="formContent">
+            <h1 id='pergunta'>Sistema de votação</h1>
+            <h3 id='tempoRestante'>00:00:00</h3>
+        </div>
+
+        <br />
+
+        <div id="formContentVotos">
+        
+
+
+
+        
+
+        <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-success" onclick="app.onClickSim()">Sim</button>
+            <button type="button" class="btn btn-danger" onclick="app.onClickNao()">Não</button>
+            <button type="button" class="btn btn-warning" onclick="app.onClickTantoFaz()">Tanto Faz</button>
+        </div>
+        <br />
+
+        <input type="text" id="justificativaTexto" placeholder="Justificativa" size="50px" />  
+        <button type="button" class="btn btn-primary" onclick="app.onClickJustificar()">Justificar</button>
+
+        <br /><br />
+
+        <h5>
+            <span class="badge badge-primary">Votos Sim <b id='totalSim'>0</b></span>
+            <span class="badge badge-primary">Votos Não <b id='totalNao'>0</b></span>
+            <span class="badge badge-primary">Votos Tanto faz <b id='totalTantoFaz'>0</b></span>
+        </h5>
+        
+        <br />
+        
+        <table id='tabelaVotos'>
+            <tr>
+                <th>Nome</th>
+                <th>Voto</th>
+				        <th>Justificativa</th>
+            </tr>
+        </table>
+        <br />
+        </div>
+ 
+
+    </div>
+</body>
+<script type="text/javascript" src="app.js"></script>
+</html>
